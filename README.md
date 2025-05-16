@@ -8,8 +8,6 @@ Upload PDFs, ask questions, and get context-aware answers using Pinecone and Goo
 
 ## Features
 
-- **Cyberpunk UI:** Neon, dark, and minimal frontend.
-- **Markdown Chat:** Responses rendered in Markdown with code highlighting.
 - **PDF Upload:** Upload up to 20 PDFs at once.
 - **RAG Backend:** Uses Pinecone for vector search and Google Gemini for answer generation.
 - **Dockerized:** Easy to run anywhere.
