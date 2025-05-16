@@ -1,5 +1,5 @@
 
-# RAG App 🚀 (Cyberpunk Edition)
+# RAG App 
 
 A cyberpunk-themed Retrieval-Augmented Generation (RAG) web application.  
 Upload PDFs, ask questions, and get context-aware answers using Pinecone and Google Gemini.
