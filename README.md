@@ -75,7 +75,7 @@ rag_app/
 │
 ├── app.py              # Flask app entrypoint
 ├── controllers.py      # All API endpoints and logic
-├── index.html          # Cyberpunk frontend
+├── index.html          
 ├── requirements.txt
 ├── Dockerfile
 ├── .env
