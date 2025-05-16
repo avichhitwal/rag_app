@@ -10,6 +10,7 @@ import time
 import json
 from google import genai
 import re
+import time
 
 def init_pinecone():
     api_key = os.environ.get('PINECONE_API_KEY')
@@ -109,6 +110,12 @@ def chunk_text(text, max_tokens=512, overlap=200):
     
     return chunks
 
+def estimate_tokens(text):
+    # Rough estimate: 1 token ≈ 0.75 words ≈ 4 characters
+    # This gives you a safe upper-bound
+    return max(1, len(text) // 4)
+
+
 @app.route('/',methods=['GET'])
 def home():
     return "api is running"
@@ -158,18 +165,42 @@ def upload_pdfs():
 
         os.remove(tmp_path)
 
-    # 3) Upsert via upsert_records
     pc         = init_pinecone()
     idx        = pc.Index(os.environ['PINECONE_INDEX_NAME'])
     namespace  = app.config['PINECONE_NAMESPACE']
-    BATCH_SIZE = 50
+    BATCH_SIZE = 96
+
+    MAX_TOKENS_PER_MIN = 250000
+    used_tokens = 0
+    start_time = time.time()
 
     for i in range(0, len(all_records), BATCH_SIZE):
         batch = all_records[i:i + BATCH_SIZE]
-        idx.upsert_records(
-            namespace=namespace,
-            records=batch
-        )
+
+        # Estimate token usage for this batch
+        batch_tokens = sum(estimate_tokens(record["text"]) for record in batch)
+
+        # Wait if needed to stay within token/minute limit
+        elapsed = time.time() - start_time
+        if used_tokens + batch_tokens > MAX_TOKENS_PER_MIN:
+            wait_time = max(0, 60 - elapsed)
+            print(f"[Throttle] Sleeping {wait_time:.2f}s to reset token budget...")
+            time.sleep(wait_time)
+            used_tokens = 0
+            start_time = time.time()
+
+        # Upsert batch
+        idx.upsert_records(namespace=namespace, records=batch)
+        used_tokens += batch_tokens
+        print(f"[Upsert] Sent {batch_tokens} tokens (used: {used_tokens})")
+
+    # for i in range(0, len(all_records), BATCH_SIZE):
+    #     batch = all_records[i:i + BATCH_SIZE]
+    #     idx.upsert_records(
+    #         namespace=namespace,
+    #         records=batch
+    #     )
+    #     time.sleep(1)  
 
     return jsonify({
         "success":         True,
