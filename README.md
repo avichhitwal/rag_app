@@ -19,10 +19,10 @@ Upload PDFs, ask questions, and get context-aware answers using Pinecone and Goo
 ### 1. Clone & Install
 
 ```sh
-git clone <your-repo-url>
+git clone https://github.com/avichhitwal/rag_app
 cd rag_app
 python -m venv myenv
-myenv\Scripts\activate  # On Windows
+.\myenv\Scripts\activate.ps1  # On Windows
 pip install -r requirements.txt
 ```
 
@@ -52,8 +52,8 @@ Open `index.html` in your browser for the frontend.
 ### Build & Run
 
 ```sh
-docker build -t rag_app:v2 .
-docker run -p 5000:5000 rag_app:v2
+docker build -t rag_app:v6 .
+docker run -p 5000:5000 rag_app:v6
 ```
 
 ---
