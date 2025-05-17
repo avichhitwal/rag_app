@@ -3,6 +3,7 @@
 
 A Retrieval-Augmented Generation (RAG) web application.  
 Upload PDFs, ask questions, and get context-aware answers using Pinecone and Google Gemini.
+
 Application is highly scalable and can leverage paid hosting and storage plans to adapt to higher traffic.
 ---
 
