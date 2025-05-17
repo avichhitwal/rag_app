@@ -193,6 +193,8 @@ def upload_pdfs():
         idx.upsert_records(namespace=namespace, records=batch)
         used_tokens += batch_tokens
         print(f"[Upsert] Sent {batch_tokens} tokens (used: {used_tokens})")
+        
+        time.sleep(1.5)
 
     # for i in range(0, len(all_records), BATCH_SIZE):
     #     batch = all_records[i:i + BATCH_SIZE]

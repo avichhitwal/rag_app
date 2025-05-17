@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Set environment variables directly here (⚠️ Not safe for production)
-ENV PINECONE_API_KEY=pcsk_2FKDUV_T35pfR1tJybKuxLjqLWwTXkZxPV3LAa4gvh8EVFfvXoNZeLCN5HKuoVzpz9NR9N
+ENV PINECONE_API_KEY=pcsk_ueZNX_216ZdxhgjYznLYCg87a1PLWVVhbefmnKvH1iPt2ic5Z5twzk14Kia2rbVjoSPSc
 ENV PINECONE_INDEX_NAME=ragdocs
 ENV GEMINI=AIzaSyDt6ottoOurSbY_WhW0K9_nz-PW9mNrlSQ
 
