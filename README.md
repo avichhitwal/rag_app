@@ -52,8 +52,8 @@ Open `index.html` in your browser for the frontend.
 ### Build & Run
 
 ```sh
-docker build -t rag_app:v6 .
-docker run -p 5000:5000 rag_app:v6
+docker build -t rag_app:v8 .
+docker run -p 5000:5000 rag_app:v8
 ```
 
 ---
